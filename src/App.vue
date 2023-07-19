@@ -1,8 +1,10 @@
 <template>
   <h1 class="titulo">Buscador de clima</h1>
-  <div class="contenedor">
+  <div class="contenedor buscador-clima">
     <Formulario @obtener-clima="obtenerClima"/>
-    <Clima v-if="mostrarClima"/>
+    <Spinner v-if="cargando"/>
+    <Alerta v-if="error">{{ error }}</Alerta>
+    <Clima v-if="mostrarClima" :clima="clima"/>
   </div>
 </template>
 
@@ -10,9 +12,11 @@
 //Components
 import Formulario from "./components/Formulario.vue";
 import Clima from "./components/Clima.vue";
+import Spinner from "./components/Spinner.vue"
+import Alerta from "./components/Alerta.vue";
 //Composables
 import useClima from "./composables/useClima";
 //Composables
-const { obtenerClima, clima, mostrarClima } = useClima();
+const { obtenerClima, clima, mostrarClima, cargando, error } = useClima();
 
 </script>
